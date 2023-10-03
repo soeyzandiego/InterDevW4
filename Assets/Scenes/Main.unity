@@ -215,13 +215,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d5550d28d485034cb95c896ef57f526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  target: {fileID: 590976308}
+  offset: {x: 0, y: 0, z: 0}
   smoothTime: 0
+  leftBound: -50
+  rightBound: 50
 --- !u!1 &590976303
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,8 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba7e504151ae724fbff595046525dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 9
-  castDist: 1
+  moveSpeed: 1500
+  velocityCap: 20
+  castDist: 0.8
   jumpForce: 17
   gravScale: 5
   gravFall: 20
@@ -280,7 +284,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &590976306
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -367,7 +371,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 590976303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.0235806, y: -2.52, z: 0}
+  m_LocalPosition: {x: -2.0235806, y: -2.96, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -384,10 +388,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 590976303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9ec54bd36ae6644aab8b82b249cd102, type: 3}
+  m_Script: {fileID: 11500000, guid: 563d6811b1b045c418d4dc3508b20448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pivotPoint: {fileID: 1856830326}
+  shootPoint: {fileID: 1817785426}
+  weaponSprite: {fileID: 1936415537}
+  weapons:
+  - {fileID: 11400000, guid: 6a2c6281c0e149f489c8ced8cf881140, type: 2}
 --- !u!1 &1436469917
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,8 +474,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1436469917}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0674, y: -4.732, z: 0}
-  m_LocalScale: {x: 43.337166, y: 2.3639, z: 1}
+  m_LocalPosition: {x: 4.0957, y: -4.732, z: 0}
+  m_LocalScale: {x: 35.423412, y: 2.3639, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -499,6 +507,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1817785425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1817785426}
+  m_Layer: 2
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1817785426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817785425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.853, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1856830326}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1856830325
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +567,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1936415536}
+  - {fileID: 1817785426}
   m_Father: {fileID: 590976308}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

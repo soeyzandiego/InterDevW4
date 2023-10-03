@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float velocityCap = 200f;
 
     [Header("Jumping")]
     [SerializeField] float castDist = 1f;
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        horAxis = Input.GetAxis("Horizontal");
+        horAxis = Input.GetAxisRaw("Horizontal");
 
         PlayerDirection();
 
@@ -39,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (horAxis > 0) { rb.velocity = new Vector2(horAxis * moveSpeed, rb.velocity.y); }
-        
+        //if (Mathf.Abs(horAxis) > 0) { rb.velocity = new Vector2(horAxis * moveSpeed, rb.velocity.y); }
+
 
         if (jump)
         {
@@ -56,6 +57,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (hit.collider != null) { grounded = true; }
         else { grounded = false; }
+
+        Vector2 moveVec = new Vector2(horAxis * moveSpeed * Time.fixedDeltaTime, 0);
+        rb.AddForce(moveVec, ForceMode2D.Impulse);
+
+        float cappedVel = Mathf.Clamp(rb.velocity.x, -velocityCap, velocityCap);
+        rb.velocity = new Vector2(cappedVel, rb.velocity.y);
     }
 
     void PlayerDirection()
