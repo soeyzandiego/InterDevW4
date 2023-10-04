@@ -15,7 +15,7 @@ public class FollowCamera : MonoBehaviour
     Vector3 vel = Vector3.zero;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 targetPos = target.position + offset;
         targetPos.z = -10;

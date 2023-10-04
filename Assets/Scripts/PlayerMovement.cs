@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float gravFall = 40f;
 
     Rigidbody2D rb;
+    Animator anim;
 
     float horAxis;
     bool grounded;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -32,17 +34,14 @@ public class PlayerMovement : MonoBehaviour
 
         PlayerDirection();
 
-        if (grounded && Input.GetButtonDown("Jump"))
-        {
-            jump = true;
-        }
+        if (grounded && Input.GetButtonDown("Jump")) { jump = true; }
+
+        anim.SetBool("moving", Mathf.Abs(horAxis) > 0.3f);
+        anim.SetBool("grounded", grounded);
     }
 
     void FixedUpdate()
     {
-        //if (Mathf.Abs(horAxis) > 0) { rb.velocity = new Vector2(horAxis * moveSpeed, rb.velocity.y); }
-
-
         if (jump)
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -59,10 +58,13 @@ public class PlayerMovement : MonoBehaviour
         else { grounded = false; }
 
         Vector2 moveVec = new Vector2(horAxis * moveSpeed * Time.fixedDeltaTime, 0);
-        rb.AddForce(moveVec, ForceMode2D.Impulse);
+        rb.AddForce(moveVec, ForceMode2D.Force);
 
         float cappedVel = Mathf.Clamp(rb.velocity.x, -velocityCap, velocityCap);
         rb.velocity = new Vector2(cappedVel, rb.velocity.y);
+
+        // TODO/stretch custom(?) drag for only x axis
+        // TODO/stretch coyote time
     }
 
     void PlayerDirection()

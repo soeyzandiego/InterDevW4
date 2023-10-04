@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a228b0f3df58c2b489e8438c3aeadcee, type: 3}
   m_Name: Rifle
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  knockbackForce: 20
+  sprite: {fileID: 21300000, guid: 7796612139e0b9246934fa377aad8746, type: 3}
+  knockbackForce: 70
   bulletSpeed: 50
   bulletDelay: 0.1
+  magazineSize: 15
   bulletPrefab: {fileID: 3218050692061174946, guid: d38c493c98dc65c4bb22a8156873dc66, type: 3}
