@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    int bulletsShot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) { RestartLevel(); }
+        if (Input.GetKeyDown(KeyCode.R)) 
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 2) { LoadScene(0); }
+            else { RestartLevel(); }
+        }
     }
 
     public void LoadScene(int index)
@@ -26,5 +32,15 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void CountBullet()
+    {
+        bulletsShot++;
+    }
+
+    public int GetBulletCount()
+    {
+        return bulletsShot;
     }
 }

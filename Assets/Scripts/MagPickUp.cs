@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class MagPickUp : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        WeaponManager playerWeapon = collision.GetComponent<WeaponManager>();
+        WeaponManager playerWeapon = collision.gameObject.GetComponent<WeaponManager>();
         if (playerWeapon != null)
         {
             playerWeapon.Reload();
             Destroy(gameObject);
         }
     }
+
 }

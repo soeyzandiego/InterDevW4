@@ -16,5 +16,5 @@ MonoBehaviour:
   knockbackForce: 70
   bulletSpeed: 50
   bulletDelay: 0.1
-  magazineSize: 15
+  magazineSize: 12
   bulletPrefab: {fileID: 3218050692061174946, guid: d38c493c98dc65c4bb22a8156873dc66, type: 3}

@@ -36,7 +36,7 @@ public class WeaponManager : MonoBehaviour
     void Update()
     {
         RotateGun();
-        SwapWeapon(Mathf.FloorToInt(Input.mouseScrollDelta.y));
+        if (weapons.Count > 1) { SwapWeapon(Mathf.FloorToInt(Input.mouseScrollDelta.y)); }
 
         ammoText.text = magazine.ToString();
         if (Input.GetMouseButton(0) && magazine > 0)
@@ -77,6 +77,7 @@ public class WeaponManager : MonoBehaviour
     void Shoot()
     {
         magazine--;
+        FindObjectOfType<GameManager>().CountBullet();
 
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         // TODO this is setup wrong right now, the velocity is still slower if shooting close to the body
